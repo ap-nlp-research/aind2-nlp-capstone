@@ -1,0 +1,4 @@
+#python3.6
+jupyter==1.0.0
+tensorflow==1.1
+keras==2.2.4
