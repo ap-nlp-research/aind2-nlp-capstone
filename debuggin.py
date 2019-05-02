@@ -202,7 +202,9 @@ if __name__ == '__main__':
     # build a loss function
     loss = tf.reduce_mean(tf.losses.sparse_softmax_cross_entropy(labels=targets, logits=logits), name='acc_loss')
     # build accuracy metric
-    predictions = tf.transpose(tf.argmax(logits, axis=2, name="prediction"))
+    predictions = keras.backend.argmax(logits)
+
+
     accuracy, update_count_op = tf.metrics.accuracy(labels=targets, predictions=predictions)
 
     variables = tf.trainable_variables()
@@ -219,8 +221,8 @@ if __name__ == '__main__':
           metrics=[loss, accuracy],
           inputs=preproc_english_sentences,
           targets=preproc_french_sentences,
-          batch_size=32,
-          checkpoint_dir='./checkpoints')
+          epochs=10,
+          batch_size=32)
 
     print("Finished training")
 
